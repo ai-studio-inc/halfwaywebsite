@@ -2,7 +2,7 @@ import { defineConfig } from 'vite'
 import { resolve } from 'path'
 
 export default defineConfig({
-    base: './', // Relative base path for GitHub Pages
+    base: '/halfwaywebsite/', // Relative base path for GitHub Pages
     build: {
         outDir: 'dist',
         rollupOptions: {
