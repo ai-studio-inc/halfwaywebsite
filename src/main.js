@@ -108,11 +108,11 @@ tabs.forEach(tab => {
 const heroImg = document.getElementById('hero-slideshow-img');
 if (heroImg) {
   const heroImages = [
-    "/meetupresultsview.PNG",
-    "/meetupmidpoint.PNG",
-    "/meetuppage_events.PNG",
-    "/meetuphostview.PNG",
-    "/meetupcategory.PNG"
+    "meetupresultsview.PNG",
+    "meetupmidpoint.PNG",
+    "meetuppage_events.PNG",
+    "meetuphostview.PNG",
+    "meetupcategory.PNG"
   ];
   let currentHeroIndex = 0;
 
