@@ -51,6 +51,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // Feature Tabs Logic
 const tabs = document.querySelectorAll('.feature-tab');
 const previewImg = document.getElementById('feature-preview-img');
+const previewVideo = document.getElementById('feature-preview-video');
 let slideshowInterval;
 
 tabs.forEach(tab => {
@@ -67,40 +68,54 @@ tabs.forEach(tab => {
     // Add active class to clicked tab
     tab.classList.add('active');
 
-    // Check for multiple images (slideshow)
+    // Check for video
+    const videoSrc = tab.getAttribute('data-video');
     const imagesData = tab.getAttribute('data-images');
+    const imageSrc = tab.getAttribute('data-image');
 
-    if (imagesData) {
-      const images = JSON.parse(imagesData);
-      let currentIndex = 0;
+    if (videoSrc) {
+      // Show video, hide image
+      previewImg.style.display = 'none';
+      previewVideo.style.display = 'block';
+      previewVideo.src = videoSrc;
+      previewVideo.play();
+    } else {
+      // Show image, hide video
+      previewVideo.style.display = 'none';
+      previewVideo.pause();
+      previewImg.style.display = 'block';
 
-      // Function to change image
-      const changeImage = (src) => {
+      if (imagesData) {
+        const images = JSON.parse(imagesData);
+        let currentIndex = 0;
+
+        // Function to change image
+        const changeImage = (src) => {
+          previewImg.style.opacity = '0';
+          setTimeout(() => {
+            previewImg.src = src;
+            previewImg.style.opacity = '1';
+          }, 200);
+        };
+
+        // Set initial image
+        changeImage(images[0]);
+
+        // Start slideshow
+        slideshowInterval = setInterval(() => {
+          currentIndex = (currentIndex + 1) % images.length;
+          changeImage(images[currentIndex]);
+        }, 3000); // Change every 3 seconds
+
+      } else {
+        // Single image fallback
         previewImg.style.opacity = '0';
+
         setTimeout(() => {
-          previewImg.src = src;
+          previewImg.src = imageSrc;
           previewImg.style.opacity = '1';
         }, 200);
-      };
-
-      // Set initial image
-      changeImage(images[0]);
-
-      // Start slideshow
-      slideshowInterval = setInterval(() => {
-        currentIndex = (currentIndex + 1) % images.length;
-        changeImage(images[currentIndex]);
-      }, 3000); // Change every 3 seconds
-
-    } else {
-      // Single image fallback
-      const newImage = tab.getAttribute('data-image');
-      previewImg.style.opacity = '0';
-
-      setTimeout(() => {
-        previewImg.src = newImage;
-        previewImg.style.opacity = '1';
-      }, 200);
+      }
     }
   });
 });

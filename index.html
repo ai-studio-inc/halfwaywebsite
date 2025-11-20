@@ -69,18 +69,17 @@
 
         <div class="feature-showcase">
           <div class="feature-tabs">
-            <div class="feature-tab active" data-image="feature-midpoint.jpg">
-              <h3>Fair Midpoints</h3>
-              <p>Add up to 5 starting points. We find balanced spots near the midpoint so everyone meets halfway.</p>
-            </div>
-            <div class="feature-tab" data-image="feature-event.png"
-              data-images='["feature-event.png", "meetupeventdetailview.PNG", "meetuppage_events.PNG"]'>
-              <h3>Managed Events</h3>
-              <p>Turn places into events: host, set time, add a note, and share. Track RSVPs to keep plans clear.</p>
-            </div>
-            <div class="feature-tab" data-image="feature-profile.png">
+            <div class="feature-tab active" data-image="feature-profile.png">
               <h3>Social Profiles</h3>
               <p>Add and follow friends, save favourites, share spots, and see activity. Coordinate with ease.</p>
+            </div>
+            <div class="feature-tab" data-video="demo1meethalfway.mov">
+              <h3>Meet Halfway</h3>
+              <p>Use your friends locations with yours (anchors) to find places in between.</p>
+            </div>
+            <div class="feature-tab" data-video="creatingevent.MOV">
+              <h3>Managed Events</h3>
+              <p>Turn places into events: host, set time, add a note, and share. Track RSVPs to keep plans clear.</p>
             </div>
             <div class="feature-tab" data-image="feature-categories.png">
               <h3>Smarter Discovery</h3>
@@ -90,7 +89,9 @@
 
           <div class="feature-preview">
             <div class="phone-mockup small">
-              <img id="feature-preview-img" src="feature-midpoint.jpg" alt="Feature Preview" />
+              <img id="feature-preview-img" src="feature-profile.png" alt="Feature Preview" />
+              <video id="feature-preview-video" loop muted playsinline
+                style="display: none; width: 100%; height: auto;"></video>
             </div>
           </div>
         </div>
