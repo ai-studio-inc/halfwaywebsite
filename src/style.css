@@ -716,6 +716,19 @@ footer {
   border-color: white;
 }
 
+@media (max-width: 640px) {
+  .hero-actions {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--spacing-xs);
+  }
+
+  .hero .btn {
+    padding: 0.85rem 1.5rem;
+    font-size: 1rem;
+  }
+}
+
 /* Ensure hero content is above overlay */
 .hero .container {
   position: relative;
