@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="120.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us - Halfway</title>
+  <meta name="description"
+    content="Get in touch with the Halfway team. Send us your feedback, report bugs, or request features." />
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="container nav-content">
+      <a href="index.html" class="logo">
+        <img src="120.png" alt="Halfway Logo" />
+        Halfway
+      </a>
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <a href="index.html" class="btn btn-secondary">Back to Home</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="contact-section">
+      <div class="container">
+        <div class="contact-form-section">
+          <h2>Send us a message</h2>
+          <form id="contact-form" class="contact-form">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" required placeholder="Your name">
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+            </div>
+
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <select id="subject" name="subject" required>
+                <option value="">Select a topic...</option>
+                <option value="feedback">General Feedback</option>
+                <option value="bug">Bug Report</option>
+                <option value="feature">Feature Request</option>
+                <option value="account">Account Issue</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="6" required
+                placeholder="Tell us what's on your mind..."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-large">Send Message</button>
+            <p class="form-note">We'll get back to you as soon as possible at <strong>jimjatt1999@gmail.com</strong>
+            </p>
+          </form>
+        </div>
+
+        <!-- Contact Info & FAQ -->
+        <div class="contact-info-section">
+          <div class="info-card">
+            <h3>What can we help with?</h3>
+            <ul class="help-list">
+              <li>
+                <strong>Feedback:</strong> Share your thoughts on how we can improve Halfway
+              </li>
+              <li>
+                <strong>Bug Reports:</strong> Found something that's not working? Let us know
+              </li>
+              <li>
+                <strong>Feature Requests:</strong> Have an idea for a new feature? We're all ears
+              </li>
+              <li>
+                <strong>Account Issues:</strong> Need help with your account or privacy settings?
+              </li>
+              <li>
+                <strong>General Inquiries:</strong> Any other questions about Halfway
+              </li>
+            </ul>
+          </div>
+
+          <div class="info-card">
+            <h3>Quick Answers</h3>
+            <div class="faq-item">
+              <h4>How do I delete my account?</h4>
+              <p>You can delete your account in-app under Settings → Account → Delete Account. This will remove all
+                your data.</p>
+            </div>
+            <div class="faq-item">
+              <h4>Is my location data private?</h4>
+              <p>Yes! Your location is only shared according to your privacy settings. Check our <a
+                  href="privacy.html">Privacy Policy</a> for details.</p>
+            </div>
+            <div class="faq-item">
+              <h4>How do I report inappropriate content?</h4>
+              <p>Use the report feature in-app, or contact us directly with details about the content or user.</p>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <h3>Other Ways to Reach Us</h3>
+            <p>
+              <strong>Email:</strong> <a href="mailto:jimjatt1999@gmail.com">jimjatt1999@gmail.com</a><br>
+              <strong>GitHub:</strong> <a href="https://github.com/ai-studio-inc" target="_blank"
+                rel="noopener">ai-studio-inc</a><br>
+              <strong>Company:</strong> Akagawa Innovations<br>
+              <strong>Website:</strong> <a href="https://akagawa-innovations-website.vercel.app/" target="_blank"
+                rel="noopener">akagawa-innovations-website.vercel.app</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <div class="logo">
+            <img src="120.png" alt="Halfway Logo" />
+            Halfway
+          </div>
+          <p>Fair meeting places for everyone.</p>
+        </div>
+        <div class="footer-links">
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="contact.html">Contact Us</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Zecro Studios. All rights reserved.</p>
+        <p class="made-by">
+          Made by the minds in Tokyo, Japan at <a href="#" class="akagawa-link">Akagawa Innovations</a> with help from
+          around the world
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/main.js"></script>
+  <script>
+    // Form handling with better UX
+    document.getElementById('contact-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const formData = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        subject: document.getElementById('subject').value,
+        message: document.getElementById('message').value
+      };
+
+      // Create the email body
+      const emailBody = `From: ${formData.name} (${formData.email})\nSubject: ${formData.subject}\n\n${formData.message}`;
+
+      // Show success modal with instructions
+      showSuccessModal(formData, emailBody);
+
+      // Reset form
+      this.reset();
+    });
+
+    function showSuccessModal(formData, emailBody) {
+      // Create modal overlay
+      const modal = document.createElement('div');
+      modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        padding: 1rem;
+      `;
+
+      // Create modal content
+      const modalContent = document.createElement('div');
+      modalContent.style.cssText = `
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: 24px;
+        padding: 2rem;
+        max-width: 600px;
+        width: 100%;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      `;
+
+      modalContent.innerHTML = `
+        <h2 style="margin-bottom: 1rem; color: var(--color-text);">Ready to Send</h2>
+        <p style="margin-bottom: 1.5rem; color: var(--color-text-muted);">
+          Please send your message to us at:
+        </p>
+        <div style="background: var(--color-bg); padding: 1rem; border-radius: 12px; margin-bottom: 1.5rem; border: 1px solid var(--color-border);">
+          <p style="margin: 0; font-weight: 600; color: var(--color-primary); font-size: 1.1rem;">
+            jimjatt1999@gmail.com
+          </p>
+        </div>
+        <div style="background: var(--color-bg); padding: 1rem; border-radius: 12px; margin-bottom: 1.5rem; border: 1px solid var(--color-border);">
+          <p style="margin: 0 0 0.5rem 0; font-weight: 600; color: var(--color-text); font-size: 0.9rem;">Your message:</p>
+          <pre style="margin: 0; white-space: pre-wrap; font-family: var(--font-sans); font-size: 0.9rem; color: var(--color-text-muted); line-height: 1.6;">${emailBody}</pre>
+        </div>
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+          <button id="copy-btn" class="btn btn-primary" style="flex: 1;">
+            Copy Message
+          </button>
+          <button id="open-email-btn" class="btn btn-secondary" style="flex: 1;">
+            Open Email App
+          </button>
+        </div>
+        <button id="close-modal-btn" style="margin-top: 1rem; width: 100%; padding: 0.75rem; background: transparent; border: none; color: var(--color-text-muted); cursor: pointer; font-size: 0.9rem;">
+          Close
+        </button>
+      `;
+
+      modal.appendChild(modalContent);
+      document.body.appendChild(modal);
+
+      // Copy button functionality
+      document.getElementById('copy-btn').addEventListener('click', function () {
+        navigator.clipboard.writeText(emailBody).then(() => {
+          this.textContent = 'Copied!';
+          setTimeout(() => {
+            this.textContent = 'Copy Message';
+          }, 2000);
+        });
+      });
+
+      // Open email button functionality
+      document.getElementById('open-email-btn').addEventListener('click', function () {
+        const mailtoLink = 'mailto:jimjatt1999@gmail.com?subject=' + encodeURIComponent(formData.subject + ' - ' + formData.name) + '&body=' + encodeURIComponent(emailBody);
+        window.open(mailtoLink, '_blank');
+      });
+
+      // Close modal
+      function closeModal() {
+        document.body.removeChild(modal);
+      }
+
+      document.getElementById('close-modal-btn').addEventListener('click', closeModal);
+      modal.addEventListener('click', function (e) {
+        if (e.target === modal) closeModal();
+      });
+    }
+  </script>
+</body>
+
+</html>

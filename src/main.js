@@ -6,37 +6,20 @@ createIcons({
   icons
 });
 
-// Theme Toggle Logic
-const themeToggle = document.getElementById('theme-toggle');
-const moonIcon = document.querySelector('.moon-icon');
-const sunIcon = document.querySelector('.sun-icon');
+// Automatic Theme Detection (follows system preference)
 const html = document.documentElement;
 
-// Check for saved theme preference or system preference
-const savedTheme = localStorage.getItem('theme');
-const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-const currentTheme = savedTheme || systemTheme;
-
-function setTheme(theme) {
-  html.setAttribute('data-theme', theme);
-  localStorage.setItem('theme', theme);
-
-  if (theme === 'dark') {
-    moonIcon.style.display = 'none';
-    sunIcon.style.display = 'block';
-  } else {
-    moonIcon.style.display = 'block';
-    sunIcon.style.display = 'none';
-  }
+// Function to set theme based on system preference
+function setThemeFromSystem() {
+  const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  html.setAttribute('data-theme', systemTheme);
 }
 
-setTheme(currentTheme);
+// Set initial theme
+setThemeFromSystem();
 
-themeToggle.addEventListener('click', () => {
-  const current = html.getAttribute('data-theme');
-  const next = current === 'dark' ? 'light' : 'dark';
-  setTheme(next);
-});
+// Listen for system theme changes
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', setThemeFromSystem);
 
 // Smooth scroll for anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -141,15 +124,51 @@ tabs.forEach(tab => {
     }, 200); // Wait for fade out
   });
 });
-// Hero Slideshow Logic
+// Hero Background Slideshow
+// Hero Background Slideshow
+const heroBgContainer = document.getElementById('hero-background');
+if (heroBgContainer) {
+  const imagesGlob = import.meta.glob('./assets/hero-images/*.{avif,jpg,jpeg,png,webp}', { eager: true });
+  const bgImages = Object.values(imagesGlob).map(module => module.default);
+
+  if (bgImages.length > 0) {
+    const shuffledImages = [...bgImages];
+    for (let i = shuffledImages.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffledImages[i], shuffledImages[j]] = [shuffledImages[j], shuffledImages[i]];
+    }
+
+    shuffledImages.forEach((src) => {
+      const img = document.createElement('img');
+      img.src = src;
+      img.className = 'hero-bg-image';
+      img.alt = "City background";
+      heroBgContainer.appendChild(img);
+    });
+
+    const images = heroBgContainer.querySelectorAll('.hero-bg-image');
+    let currentBgIndex = Math.floor(Math.random() * images.length);
+    images[currentBgIndex].classList.add('active');
+
+    if (images.length > 1) {
+      setInterval(() => {
+        images[currentBgIndex].classList.remove('active');
+        currentBgIndex = (currentBgIndex + 1) % images.length;
+        images[currentBgIndex].classList.add('active');
+      }, 5000); // Change background every 5 seconds
+    }
+  }
+}
+
+// Hero Phone Slideshow Logic
 const heroImg = document.getElementById('hero-slideshow-img');
 if (heroImg) {
   const heroImages = [
+    "home2.PNG",
+    "new home.PNG",
     "meetupresultsview.PNG",
     "meetupmidpoint.PNG",
-    "meetuppage_events.PNG",
-    "meetuphostview.PNG",
-    "meetupcategory.PNG"
+    "meetuppage_events.PNG"
   ];
   let currentHeroIndex = 0;
 

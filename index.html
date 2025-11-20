@@ -18,10 +18,6 @@
         Halfway
       </a>
       <div style="display: flex; align-items: center; gap: 1rem;">
-        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
-          <i data-lucide="moon" class="moon-icon"></i>
-          <i data-lucide="sun" class="sun-icon" style="display: none;"></i>
-        </button>
         <a href="https://apps.apple.com/us/app/halfway-app/id6744035312" class="btn btn-primary">Download App</a>
       </div>
     </div>
@@ -29,9 +25,13 @@
 
   <main>
     <section class="hero">
+      <div class="hero-background" id="hero-background">
+        <div class="hero-overlay"></div>
+        <!-- Images will be injected here by JS -->
+      </div>
       <div class="container">
         <div class="hero-content">
-          <h1 class="hero-title">Meet in the middle.<br>Literally.</h1>
+          <h1 class="hero-title">Meet in the <span class="mono-text">middle</span>.<br>The fair way.</h1>
           <p class="hero-desc">
             Halfway helps you find fair meeting places between friends. Add up to 5 starting locations, discover
             balanced spots, and turn any place into a managed event.
@@ -51,7 +51,38 @@
         </div>
         <div class="hero-visual">
           <div class="phone-mockup">
-            <img id="hero-slideshow-img" src="meetupresultsview.PNG" alt="Halfway App Home Screen" />
+            <img id="hero-slideshow-img" src="home2.PNG" alt="Halfway App Home Screen" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mission">
+      <div class="container">
+        <div class="mission-content">
+          <h2>Bridging the digital divide.</h2>
+          <p class="mission-statement">
+            We're all scrolling, but we're not connecting. Halfway transforms how friends meet in the real world by
+            solving the oldest question: <em>where should we go?</em>
+          </p>
+          <p class="mission-details">
+            Discover places with the convenience of distance in mind. Manage meetups seamlessly. Turn plans into
+            reality, all in one app. Halfway isn't just about finding a location; it's about making real-world
+            connections effortless.
+          </p>
+          <div class="mission-stats">
+            <div class="stat">
+              <h3>Fair for Everyone</h3>
+              <p>Calculate midpoints between up to 5 locations instantly</p>
+            </div>
+            <div class="stat">
+              <h3>Discover Together</h3>
+              <p>Find places everyone will love with smart categories</p>
+            </div>
+            <div class="stat">
+              <h3>Stay Organized</h3>
+              <p>Manage events, track RSVPs, and keep plans clear</p>
+            </div>
           </div>
         </div>
       </div>
@@ -68,8 +99,8 @@
         </p>
 
         <div class="feature-showcase">
-          <div class="feature-tabs">
-            <div class="feature-tab active" data-video="socialprofile.mov">
+          <div class="features-list">
+            <div class="feature-tab social-profiles-tab active" data-image="halfway_profile.PNG">
               <h3>Social Profiles</h3>
               <p>Add and follow friends, save favourites, share spots, and see activity. Coordinate with ease.</p>
             </div>
@@ -79,7 +110,8 @@
             </div>
             <div class="feature-tab" data-video="creatingevent.MOV">
               <h3>Managed Events</h3>
-              <p>Turn places into events: host, set time, add a note, and share. Track RSVPs to keep plans clear.</p>
+              <p>Turn places into events: host, set time, add a note, and share. Track RSVPs and add comments with
+                friends to keep plans clear.</p>
             </div>
             <div class="feature-tab" data-video="category.mov">
               <h3>Smarter Discovery</h3>
@@ -123,13 +155,14 @@
         </div>
         <div class="footer-links">
           <a href="privacy.html">Privacy Policy</a>
-          <a href="mailto:jimjatt1999@gmail.com">Contact Us</a>
+          <a href="contact.html">Contact Us</a>
         </div>
       </div>
       <div class="footer-bottom">
         <p>&copy; 2025 Zecro Studios. All rights reserved.</p>
         <p class="made-by">
-          Made by the minds at <a href="#" class="akagawa-link">Akagawa Innovations</a>
+          Made by the minds in Tokyo, Japan at <a href="#" class="akagawa-link">Akagawa Innovations</a> with help from
+          around the world
         </p>
       </div>
     </div>
