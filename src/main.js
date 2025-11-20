@@ -73,50 +73,72 @@ tabs.forEach(tab => {
     const imagesData = tab.getAttribute('data-images');
     const imageSrc = tab.getAttribute('data-image');
 
-    if (videoSrc) {
-      // Show video, hide image
-      previewImg.style.display = 'none';
-      previewVideo.style.display = 'block';
-      previewVideo.src = videoSrc;
-      previewVideo.play();
-    } else {
-      // Show image, hide video
-      previewVideo.style.display = 'none';
-      previewVideo.pause();
-      previewImg.style.display = 'block';
+    // Helper to fade out current content
+    const fadeOut = () => {
+      previewImg.style.opacity = '0';
+      previewVideo.style.opacity = '0';
+    };
 
-      if (imagesData) {
-        const images = JSON.parse(imagesData);
-        let currentIndex = 0;
+    fadeOut();
 
-        // Function to change image
-        const changeImage = (src) => {
-          previewImg.style.opacity = '0';
-          setTimeout(() => {
-            previewImg.src = src;
-            previewImg.style.opacity = '1';
-          }, 200);
+    setTimeout(() => {
+      if (videoSrc) {
+        // Prepare video
+        previewImg.style.display = 'none';
+        previewVideo.style.display = 'block';
+        previewVideo.src = videoSrc;
+
+        // Wait for video to be ready before fading in
+        previewVideo.onloadeddata = () => {
+          previewVideo.play();
+          previewVideo.style.opacity = '1';
         };
-
-        // Set initial image
-        changeImage(images[0]);
-
-        // Start slideshow
-        slideshowInterval = setInterval(() => {
-          currentIndex = (currentIndex + 1) % images.length;
-          changeImage(images[currentIndex]);
-        }, 3000); // Change every 3 seconds
-
+        // Fallback if already loaded or cached
+        if (previewVideo.readyState >= 3) {
+          previewVideo.play();
+          previewVideo.style.opacity = '1';
+        }
       } else {
-        // Single image fallback
-        previewImg.style.opacity = '0';
+        // Show image
+        previewVideo.style.display = 'none';
+        previewVideo.pause();
+        previewImg.style.display = 'block';
 
-        setTimeout(() => {
+        if (imagesData) {
+          const images = JSON.parse(imagesData);
+          let currentIndex = 0;
+
+          // Function to change image
+          const changeImage = (src) => {
+            previewImg.style.opacity = '0';
+            setTimeout(() => {
+              previewImg.src = src;
+              previewImg.style.opacity = '1';
+            }, 200);
+          };
+
+          // Set initial image
+          previewImg.src = images[0];
+          // Small delay to ensure src is set before fading in
+          requestAnimationFrame(() => {
+            previewImg.style.opacity = '1';
+          });
+
+          // Start slideshow
+          slideshowInterval = setInterval(() => {
+            currentIndex = (currentIndex + 1) % images.length;
+            changeImage(images[currentIndex]);
+          }, 3000); // Change every 3 seconds
+
+        } else {
+          // Single image fallback
           previewImg.src = imageSrc;
-          previewImg.style.opacity = '1';
-        }, 200);
+          requestAnimationFrame(() => {
+            previewImg.style.opacity = '1';
+          });
+        }
       }
-    }
+    }, 200); // Wait for fade out
   });
 });
 // Hero Slideshow Logic

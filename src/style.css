@@ -238,6 +238,8 @@ section {
 
 .phone-mockup {
   width: 340px;
+  aspect-ratio: 9 / 19.5;
+  /* Typical modern iPhone aspect ratio */
   border-radius: 55px;
   border: 12px solid var(--color-text);
   /* Adaptive border color */
@@ -245,7 +247,8 @@ section {
   box-shadow:
     0 50px 100px -20px rgba(0, 0, 0, 0.2),
     0 30px 60px -30px rgba(0, 0, 0, 0.3);
-  background: var(--color-bg);
+  background: #000000;
+  /* Black background to blend with screen/bezels */
   position: relative;
   animation: float 6s ease-in-out infinite;
   transform-style: preserve-3d;
@@ -260,12 +263,20 @@ section {
   bottom: 0;
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, transparent 50%);
   pointer-events: none;
+  z-index: 10;
+  /* Ensure glare is on top */
 }
 
-.phone-mockup img {
+.phone-mockup img,
+.phone-mockup video {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
   display: block;
+  transition: opacity 0.4s ease-in-out;
 }
 
 @media (max-width: 1024px) {
