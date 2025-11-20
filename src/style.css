@@ -389,7 +389,11 @@ section {
   }
 
   .phone-mockup.small {
-    width: 240px;
+    width: 200px;
+    border-width: 6px;
+    /* Slightly thinner border for smaller size */
+    border-radius: 30px;
+    /* Adjusted radius */
   }
 }
 
