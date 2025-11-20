@@ -2,14 +2,15 @@ import { defineConfig } from 'vite'
 import { resolve } from 'path'
 
 export default defineConfig({
-    base: '/halfwaywebsite/', // Relative base path for GitHub Pages
-    build: {
-        outDir: 'dist',
-        rollupOptions: {
-            input: {
-                main: resolve(__dirname, 'index.html'),
-                privacy: resolve(__dirname, 'privacy.html'),
-            },
-        },
-    }
+  // Use root as base so assets work with the custom domain (halfway.one)
+  base: '/',
+  build: {
+    outDir: 'dist',
+    rollupOptions: {
+      input: {
+        main: resolve(__dirname, 'index.html'),
+        privacy: resolve(__dirname, 'privacy.html'),
+      },
+    },
+  },
 })
