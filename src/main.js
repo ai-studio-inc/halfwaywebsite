@@ -205,8 +205,8 @@ if (contactForm) {
     const subject = contactForm.querySelector('select[name="subject"]').value;
     const message = contactForm.querySelector('textarea[name="message"]').value;
 
-    // Combine subject and message
-    const fullMessage = `Subject: ${subject}\n\n${message}`;
+    // Combine email, subject and message
+    const fullMessage = `From: ${email}\nSubject: ${subject}\n\n${message}`;
 
     const templateParams = {
       name: name,
