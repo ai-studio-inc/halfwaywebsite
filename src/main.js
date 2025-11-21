@@ -181,3 +181,57 @@ if (heroImg) {
     }, 200);
   }, 4000); // Change every 4 seconds
 }
+
+// Contact Form Logic (EmailJS)
+const contactForm = document.getElementById('contact-form');
+if (contactForm) {
+  contactForm.addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    const submitBtn = contactForm.querySelector('button[type="submit"]');
+    const originalBtnText = submitBtn.innerText;
+    submitBtn.innerText = 'Sending...';
+    submitBtn.disabled = true;
+
+    // Initialize EmailJS with Public Key
+    emailjs.init("G92X441mmhsqPPcV2");
+
+    const serviceID = 'service_899my3a';
+    const templateID = 'template_2aeothc';
+
+    // Get form values
+    const name = contactForm.querySelector('input[name="name"]').value;
+    const email = contactForm.querySelector('input[name="email"]').value;
+    const subject = contactForm.querySelector('select[name="subject"]').value;
+    const message = contactForm.querySelector('textarea[name="message"]').value;
+
+    // Combine subject and message
+    const fullMessage = `Subject: ${subject}\n\n${message}`;
+
+    const templateParams = {
+      name: name,
+      email: email,
+      message: fullMessage
+    };
+
+    emailjs.send(serviceID, templateID, templateParams)
+      .then(() => {
+        submitBtn.innerText = 'Message Sent!';
+        submitBtn.classList.add('btn-success'); // Optional: Add success style
+        contactForm.reset();
+        setTimeout(() => {
+          submitBtn.innerText = originalBtnText;
+          submitBtn.disabled = false;
+          submitBtn.classList.remove('btn-success');
+        }, 3000);
+      }, (err) => {
+        submitBtn.innerText = 'Failed to Send';
+        submitBtn.disabled = false;
+        alert('Failed to send message. Please try again later.');
+        console.error('EmailJS Error:', err);
+        setTimeout(() => {
+          submitBtn.innerText = originalBtnText;
+        }, 3000);
+      });
+  });
+}
