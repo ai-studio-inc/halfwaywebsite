@@ -1,0 +1,14 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appID": "FU526M9P3E.com.zekuro.halfwayapp",
+        "paths": [
+          "/invite/*",
+          "/profile/*",
+          "/place/*"
+        ]
+      }
+    ]
+  }
+}
